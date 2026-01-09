@@ -13,12 +13,12 @@ sudo apt update
 sudo apt upgrade
 ```
 
-### Install Git
+### Install other dependencies  
 
-If Git is not already installed:
+If not already installed:
 
 ```bash
-sudo apt install git
+ sudo apt-get install jq
 ```
 
 ## Conda Installation (ARM Architecture)

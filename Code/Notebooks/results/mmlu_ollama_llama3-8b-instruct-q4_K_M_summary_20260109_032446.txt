@@ -1,0 +1,83 @@
+MMLU Benchmark Summary (Ollama)
+================================================================================
+
+Date: 2026-01-09 03:24:46
+API Type: Ollama
+Base URL: http://127.0.0.1:11434
+Model: llama3:8b-instruct-q4_K_M
+Number of Servers: 1
+
+Configuration:
+--------------------------------------------------------------------------------
+Questions per subject: ALL
+Timeout: 600s
+Temperature: 0.0
+Num Predict: 3
+
+Overall Results:
+--------------------------------------------------------------------------------
+Total Questions: 14042
+Correct Answers: 8405
+Accuracy: 59.86%
+Average Time: 0.22 seconds
+
+Subject-wise Results:
+--------------------------------------------------------------------------------
+                            Subject  Correct  Total Accuracy (%) Avg Time (s)
+                   abstract_algebra       29    100        29.00         0.21
+                            anatomy       93    135        68.89         0.20
+                          astronomy      102    152        67.11         0.20
+                    business_ethics       67    100        67.00         0.21
+                 clinical_knowledge      187    265        70.57         0.20
+                    college_biology      104    144        72.22         0.20
+                  college_chemistry       40    100        40.00         0.21
+           college_computer_science       42    100        42.00         0.21
+                college_mathematics       30    100        30.00         0.21
+                   college_medicine      106    173        61.27         0.21
+                    college_physics       45    102        44.12         0.21
+                  computer_security       70    100        70.00         0.20
+                 conceptual_physics      129    235        54.89         0.20
+                       econometrics       48    114        42.11         0.21
+             electrical_engineering       85    145        58.62         0.20
+             elementary_mathematics      175    378        46.30         0.20
+                       formal_logic       57    126        45.24         0.21
+                       global_facts       38    100        38.00         0.20
+                high_school_biology      232    310        74.84         0.20
+              high_school_chemistry       94    203        46.31         0.21
+       high_school_computer_science       60    100        60.00         0.21
+       high_school_european_history      121    165        73.33         0.26
+              high_school_geography      158    198        79.80         0.20
+high_school_government_and_politics      156    193        80.83         0.20
+         high_school_macroeconomics      229    390        58.72         0.21
+            high_school_mathematics       71    270        26.30         0.21
+         high_school_microeconomics      164    238        68.91         0.21
+                high_school_physics       54    151        35.76         0.21
+             high_school_psychology      443    545        81.28         0.20
+             high_school_statistics       95    216        43.98         0.21
+             high_school_us_history      150    204        73.53         0.26
+          high_school_world_history      186    237        78.48         0.28
+                        human_aging      150    223        67.26         0.20
+                    human_sexuality      101    131        77.10         0.20
+                  international_law       84    121        69.42         0.20
+                      jurisprudence       75    108        69.44         0.20
+                  logical_fallacies      126    163        77.30         0.20
+                   machine_learning       48    112        42.86         0.20
+                         management       79    103        76.70         0.20
+                          marketing      201    234        85.90         0.20
+                   medical_genetics       75    100        75.00         0.20
+                      miscellaneous      635    783        81.10         0.22
+                     moral_disputes      215    346        62.14         0.20
+                    moral_scenarios      238    895        26.59         0.21
+                          nutrition      216    306        70.59         0.20
+                         philosophy      210    311        67.52         0.21
+                         prehistory      235    324        72.53         0.22
+            professional_accounting      135    282        47.87         0.26
+                   professional_law      641   1534        41.79         0.24
+              professional_medicine      193    272        70.96         0.22
+            professional_psychology      396    612        64.71         0.21
+                   public_relations       69    110        62.73         0.20
+                   security_studies      157    245        64.08         0.22
+                          sociology      163    201        81.09         0.21
+                  us_foreign_policy       85    100        85.00         0.21
+                           virology       81    166        48.80         0.20
+                    world_religions      137    171        80.12         0.20

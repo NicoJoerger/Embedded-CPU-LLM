@@ -1,0 +1,336 @@
+{
+  "uid": "tinychat-metrics",
+  "title": "TinyChatEngine Token Generation Metrics",
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "5s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Tokens per Second",
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"token_cumulative\")\n  |> filter(fn: (r) => r._field == \"tokens_per_second\")\n  |> map(fn: (r) => ({ r with _value: r._value, series: r.request_id }))",
+          "refId": "A"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "custom": {
+            "axisLabel": "Tokens/s",
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "auto"
+          }
+        }
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": ["last", "max", "mean"]
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Average Token Time (ms)",
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"token_cumulative\")\n  |> filter(fn: (r) => r._field == \"avg_token_time_ms\")\n  |> map(fn: (r) => ({ r with series: \"avg_with_ttft_\" + r.request_id }))",
+          "refId": "A"
+        },
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"token_cumulative\")\n  |> filter(fn: (r) => r._field == \"avg_token_time_no_ttft_ms\")\n  |> map(fn: (r) => ({ r with series: \"avg_no_ttft_\" + r.request_id }))",
+          "refId": "B"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "custom": {
+            "axisLabel": "Time (ms)",
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "auto"
+          }
+        }
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": ["last", "max", "mean"]
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Per-Token Generation Time",
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"token_timing\")\n  |> filter(fn: (r) => r._field == \"time_from_previous_ms\")\n  |> map(fn: (r) => ({ r with series: r.request_id }))",
+          "refId": "A"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "custom": {
+            "axisLabel": "Time (ms)",
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "auto"
+          }
+        }
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": ["last", "max", "mean"]
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Cumulative Tokens Generated",
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"token_cumulative\")\n  |> filter(fn: (r) => r._field == \"tokens_generated\")\n  |> map(fn: (r) => ({ r with series: r.request_id }))",
+          "refId": "A"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "custom": {
+            "axisLabel": "Tokens",
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "auto"
+          }
+        }
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": ["last", "max", "mean"]
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "First Token Latency (TTFT)",
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"token_timing\")\n  |> filter(fn: (r) => r._field == \"time_from_previous_ms\")\n  |> filter(fn: (r) => r.position == \"0\")\n  |> map(fn: (r) => ({ r with series: r.request_id }))",
+          "refId": "A"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "custom": {
+            "axisLabel": "TTFT (ms)",
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "auto"
+          }
+        }
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": ["last", "max", "mean"]
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Total Generation Time",
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"token_cumulative\")\n  |> filter(fn: (r) => r._field == \"total_time_ms\")\n  |> map(fn: (r) => ({ r with series: r.request_id }))",
+          "refId": "A"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 16 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "custom": {
+            "axisLabel": "Time (ms)",
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "auto"
+          }
+        }
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": ["last", "max", "mean"]
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Generation Config: Temperature & Top-P",
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"generation_start\")\n  |> filter(fn: (r) => r._field == \"temperature\")\n  |> map(fn: (r) => ({ r with series: \"temperature_\" + r.request_id }))",
+          "refId": "A"
+        },
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"generation_start\")\n  |> filter(fn: (r) => r._field == \"top_p\")\n  |> map(fn: (r) => ({ r with series: \"top_p_\" + r.request_id }))",
+          "refId": "B"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 24 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "auto"
+          }
+        }
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": ["last"]
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Generation Config: Top-K & Max Tokens",
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"generation_start\")\n  |> filter(fn: (r) => r._field == \"top_k\")\n  |> map(fn: (r) => ({ r with series: \"top_k_\" + r.request_id }))",
+          "refId": "A"
+        },
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"generation_start\")\n  |> filter(fn: (r) => r._field == \"max_tokens\")\n  |> map(fn: (r) => ({ r with series: \"max_tokens_\" + r.request_id }))",
+          "refId": "B"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 24 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "auto"
+          }
+        }
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": ["last"]
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Requests by Model",
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"generation_start\")\n  |> filter(fn: (r) => r._field == \"temperature\")\n  |> map(fn: (r) => ({ r with series: r.model_name }))",
+          "refId": "A"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 32 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "custom": {
+            "axisLabel": "Requests",
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "auto"
+          }
+        }
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": ["last"]
+        }
+      }
+    },
+    {
+      "type": "piechart",
+      "title": "Data Format Distribution",
+      "datasource": "InfluxDB",
+      "targets": [
+        {
+          "query": "from(bucket: \"llm\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"generation_start\")\n  |> filter(fn: (r) => r._field == \"temperature\")\n  |> group(columns: [\"data_format\"])\n  |> count()",
+          "refId": "A"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 32 },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        }
+      }
+    }
+  ]
+}

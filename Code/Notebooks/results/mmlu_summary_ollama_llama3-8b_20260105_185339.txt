@@ -1,0 +1,81 @@
+MMLU Benchmark Summary
+================================================================================
+
+Date: 2026-01-05 18:53:39
+API Servers: http://192.168.132.210:8080
+Checkpoint: checkpoint_20260101_224825.json
+
+Configuration:
+--------------------------------------------------------------------------------
+Questions per subject: ALL
+Timeout: 600s
+Temperature: 0.0
+Max Tokens: 3
+
+Overall Results:
+--------------------------------------------------------------------------------
+Total Questions: 14030
+Correct Answers: 6569
+Accuracy: 46.82%
+Average Time: 16.52 seconds
+
+Subject-wise Results:
+--------------------------------------------------------------------------------
+                            Subject  Correct  Total Accuracy (%) Avg Time (s)
+                   abstract_algebra       22    100        22.00        14.34
+                            anatomy       66    135        48.89        14.08
+                          astronomy       88    152        57.89        16.12
+                    business_ethics       54    100        54.00        17.23
+                 clinical_knowledge      144    265        54.34        15.02
+                    college_biology       74    144        51.39        25.31
+                  college_chemistry       33    100        33.00        23.03
+           college_computer_science       38    100        38.00        21.19
+                college_mathematics       27    100        27.00        13.98
+                   college_medicine       79    173        45.66        15.33
+                    college_physics       23    102        22.55        13.18
+                  computer_security       56    100        56.00        11.09
+                 conceptual_physics      112    235        47.66         9.66
+                       econometrics       42    114        36.84        14.45
+             electrical_engineering       63    145        43.45         9.86
+             elementary_mathematics       62    375        16.53        11.13
+                       formal_logic       21    126        16.67        15.29
+                       global_facts       17    100        17.00        10.37
+                high_school_biology      179    310        57.74        12.62
+              high_school_chemistry       58    203        28.57        12.62
+       high_school_computer_science       48    100        48.00        14.94
+       high_school_european_history      107    165        64.85        43.88
+              high_school_geography      117    198        59.09        10.16
+high_school_government_and_politics      129    193        66.84        12.08
+         high_school_macroeconomics      185    390        47.44        12.91
+            high_school_mathematics       35    270        12.96        13.99
+         high_school_microeconomics      113    238        47.48        15.39
+                high_school_physics       46    151        30.46        18.05
+             high_school_psychology      343    545        62.94        13.22
+             high_school_statistics       71    216        32.87        17.38
+             high_school_us_history      137    204        67.16        34.38
+          high_school_world_history      164    237        69.20        38.74
+                        human_aging      125    223        56.05        10.54
+                    human_sexuality       75    131        57.25        11.28
+                  international_law       80    121        66.12        14.14
+                      jurisprudence       63    108        58.33        12.29
+                  logical_fallacies       82    163        50.31        12.22
+                   machine_learning       46    112        41.07        12.95
+                         management       59    103        57.28        10.20
+                          marketing      140    234        59.83        11.38
+                   medical_genetics       52    100        52.00        11.04
+                      miscellaneous      505    783        64.50        10.46
+                     moral_disputes      118    346        34.10        12.30
+                    moral_scenarios      247    895        27.60        15.14
+                          nutrition      182    306        59.48        12.39
+                         philosophy      149    311        47.91        11.86
+                         prehistory      170    324        52.47        12.48
+            professional_accounting      110    282        39.01        15.29
+                   professional_law      626   1534        40.81        29.49
+              professional_medicine      144    272        52.94        23.20
+            professional_psychology      309    612        50.49        14.20
+                   public_relations       47    110        42.73        12.58
+                   security_studies      129    245        52.65        22.30
+                          sociology      129    201        64.18        13.30
+                  us_foreign_policy       71    100        71.00        11.51
+                           virology       83    166        50.00        11.04
+                    world_religions       75    162        46.30        10.18

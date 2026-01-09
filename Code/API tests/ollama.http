@@ -1,0 +1,110 @@
+### Ollama API Tests for llama3:8b-instruct-q4_0
+
+### 1. Chat Completion (recommended for Instruct models)
+POST http://localhost:11434/api/chat
+Content-Type: application/json
+
+{
+  "model": "llama3:8b-instruct-q4_0",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Explain briefly what Machine Learning is."
+    }
+  ],
+  "stream": false
+}
+
+###
+
+### 2. Chat Completion with System Prompt
+POST http://localhost:11434/api/chat
+Content-Type: application/json
+
+{
+  "model": "llama3:8b-instruct-q4_0",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant that gives precise and concise answers."
+    },
+    {
+      "role": "user",
+      "content": "What is the difference between CPU and GPU?"
+    }
+  ],
+  "stream": false,
+  "options": {
+    "temperature": 0.7,
+    "top_p": 0.9
+  }
+}
+
+###
+
+### 3. Text Generation (alternative API)
+POST http://localhost:11434/api/generate
+Content-Type: application/json
+
+{
+  "model": "llama3:8b-instruct-q4_0",
+  "prompt": "Write a short Python example for a Hello World function:",
+  "stream": false
+}
+
+###
+
+### 4. Chat with Streaming
+POST http://localhost:11434/api/chat
+Content-Type: application/json
+
+{
+  "model": "llama3:8b-instruct-q4_0",
+  "messages": [
+    {
+      "role": "user",
+      "content": "List the first 5 prime numbers and explain why they are prime."
+    }
+  ],
+  "stream": true
+}
+
+###
+
+### 5. List available models
+GET http://localhost:11434/api/tags
+
+###
+
+### 6. Retrieve model information
+POST http://localhost:11434/api/show
+Content-Type: application/json
+
+{
+  "name": "llama3:8b-instruct-q4_0"
+}
+
+###
+
+### 7. Chat with advanced options
+POST http://localhost:11434/api/chat
+Content-Type: application/json
+
+{
+  "model": "llama3:8b-instruct-q4_0",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Explain quantization in neural networks."
+    }
+  ],
+  "stream": false,
+  "options": {
+    "temperature": 0.7,
+    "top_k": 40,
+    "top_p": 0.9,
+    "num_predict": 500
+  }
+}
+
+###
